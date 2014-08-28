@@ -1,0 +1,35 @@
+C:\Users\Mitchell Lutzke>convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesserac
+t.png" -matte ( +clone -fuzz 40% -transparent rgb(35,111,215) ) -compose DstOut
+-composite "C:\Users\Mitchell Lutzke\Desktop\Pokemon\output.bmp"
+
+
+// this command gives only the top-left pokemon text
+C:\Users\Mitchell Lutzke\Desktop>convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_
+tesseract.png" -crop 18%x3.5%+0x0 -channel red -threshold 100% -channel green -t
+hreshold 100% -channel blue -threshold 40% ./test.png && convert "C:\Users\Mitch
+ell Lutzke\Desktop\test.png" -threshold 5 ./test.png
+
+
+
+
+
+
+C:\Users\Mitchell Lutzke\Desktop>convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 18%x3.5%+0x0 -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./test.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test.png" -threshold 5 ./test.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test.png" ./output_text bazaar
+
+
+C:\Users\Mitchell Lutzke\Desktop>convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 18%x3.5%+0x0 -fill black -fuzz 40% +opaque blue -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./test.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test.png" -threshold 5 -bordercolor black -border 50 ./test.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test.png" ./output_text bazaar
+
+
+C:\Users\Mitchell Lutzke\Desktop>convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 25.8%x4%+493+240 ./test.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test.png" -threshold 5 -bordercolor black -border 50 ./test.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test.png" ./output_text bazaar
+
+
+each name box is 165 px wide
+
+
+
+
+### top three names (BLUE TEAM)
+
+
+convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 8.6%x2.8%+493+245 ./temp.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" ./blue_first bazaar && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 8.6%x2.8%+661+245 ./temp.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" ./blue_second bazaar && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 8.6%x2.8%+828+245 ./temp.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" ./blue_third bazaar && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 8.6%x2.8%+930+640 ./temp.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" ./red_first bazaar && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 8.6%x2.8%+1095+640 ./temp.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" ./red_second bazaar && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\test_tesseract.png" -crop 8.6%x2.8%+1265+640 ./temp.png && convert "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\Users\Mitchell Lutzke\Desktop\Pokemon\temp.png" ./red_third bazaar
+
