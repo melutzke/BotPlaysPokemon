@@ -1,0 +1,1535 @@
+{
+    "Razor Leaf": {
+        "name": "Razor Leaf",
+        "base": "55",
+        "accuracy": "95",
+        "type": "grass",
+        "special": false
+    },
+    "Headbutt": {
+        "name": "Headbutt",
+        "base": "70",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Toxic": {
+        "name": "Toxic",
+        "base": "0",
+        "accuracy": "90",
+        "type": "poison",
+        "special": false
+    },
+    "Growth": {
+        "name": "Growth",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Solarbeam": {
+        "name": "Solarbeam",
+        "base": "120",
+        "accuracy": "100",
+        "type": "grass",
+        "special": true
+    },
+    "Fury Cutter": {
+        "name": "Fury Cutter",
+        "base": "20",
+        "accuracy": "95",
+        "type": "bug",
+        "special": false
+    },
+    "Leech Seed": {
+        "name": "Leech Seed",
+        "base": "0",
+        "accuracy": "90",
+        "type": "grass",
+        "special": false
+    },
+    "Sunny Day": {
+        "name": "Sunny Day",
+        "base": "0",
+        "accuracy": "0",
+        "type": "fire",
+        "special": false
+    },
+    "Giga Drain": {
+        "name": "Giga Drain",
+        "base": "75",
+        "accuracy": "100",
+        "type": "grass",
+        "special": true
+    },
+    "Tackle": {
+        "name": "Tackle",
+        "base": "50",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Poisonpowder": {
+        "name": "Poisonpowder",
+        "base": "0",
+        "accuracy": "75",
+        "type": "poison",
+        "special": false
+    },
+    "Growl": {
+        "name": "Growl",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Flamethrower": {
+        "name": "Flamethrower",
+        "base": "95",
+        "accuracy": "100",
+        "type": "fire",
+        "special": true
+    },
+    "Slash": {
+        "name": "Slash",
+        "base": "70",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Dragonbreath": {
+        "name": "Dragonbreath",
+        "base": "60",
+        "accuracy": "100",
+        "type": "dragon",
+        "special": true
+    },
+    "Fire Blast": {
+        "name": "Fire Blast",
+        "base": "120",
+        "accuracy": "85",
+        "type": "fire",
+        "special": true
+    },
+    "Strength": {
+        "name": "Strength",
+        "base": "80",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Dig": {
+        "name": "Dig",
+        "base": "80",
+        "accuracy": "100",
+        "type": "ground",
+        "special": false
+    },
+    "Smokescreen": {
+        "name": "Smokescreen",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Fire Punch": {
+        "name": "Fire Punch",
+        "base": "75",
+        "accuracy": "100",
+        "type": "fire",
+        "special": false
+    },
+    "Wing Attack": {
+        "name": "Wing Attack",
+        "base": "60",
+        "accuracy": "100",
+        "type": "flying",
+        "special": false
+    },
+    "Scary Face": {
+        "name": "Scary Face",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Surf": {
+        "name": "Surf",
+        "base": "95",
+        "accuracy": "100",
+        "type": "water",
+        "special": true
+    },
+    "Bite": {
+        "name": "Bite",
+        "base": "60",
+        "accuracy": "100",
+        "type": "dark",
+        "special": false
+    },
+    "Blizzard": {
+        "name": "Blizzard",
+        "base": "120",
+        "accuracy": "70",
+        "type": "ice",
+        "special": true
+    },
+    "Rain Dance": {
+        "name": "Rain Dance",
+        "base": "0",
+        "accuracy": "0",
+        "type": "water",
+        "special": false
+    },
+    "Waterfall": {
+        "name": "Waterfall",
+        "base": "80",
+        "accuracy": "100",
+        "type": "water",
+        "special": false
+    },
+    "Icy Wind": {
+        "name": "Icy Wind",
+        "base": "55",
+        "accuracy": "95",
+        "type": "ice",
+        "special": true
+    },
+    "Rapid Spin": {
+        "name": "Rapid Spin",
+        "base": "20",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Hydro Pump": {
+        "name": "Hydro Pump",
+        "base": "120",
+        "accuracy": "80",
+        "type": "water",
+        "special": true
+    },
+    "Mud-Slap": {
+        "name": "Mud-Slap",
+        "base": "20",
+        "accuracy": "100",
+        "type": "ground",
+        "special": true
+    },
+    "Withdraw": {
+        "name": "Withdraw",
+        "base": "0",
+        "accuracy": "0",
+        "type": "water",
+        "special": false
+    },
+    "String Shot": {
+        "name": "String Shot",
+        "base": "0",
+        "accuracy": "95",
+        "type": "bug",
+        "special": false
+    },
+    "Harden": {
+        "name": "Harden",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Gust": {
+        "name": "Gust",
+        "base": "40",
+        "accuracy": "100",
+        "type": "flying",
+        "special": true
+    },
+    "Psychic": {
+        "name": "Psychic",
+        "base": "90",
+        "accuracy": "100",
+        "type": "psychic",
+        "special": true
+    },
+    "Hyper Beam": {
+        "name": "Hyper Beam",
+        "base": "150",
+        "accuracy": "90",
+        "type": "normal",
+        "special": true
+    },
+    "Stun Spore": {
+        "name": "Stun Spore",
+        "base": "0",
+        "accuracy": "75",
+        "type": "grass",
+        "special": false
+    },
+    "Poison Sting": {
+        "name": "Poison Sting",
+        "base": "15",
+        "accuracy": "100",
+        "type": "poison",
+        "special": false
+    },
+    "Twineedle": {
+        "name": "Twineedle",
+        "base": "25",
+        "accuracy": "100",
+        "type": "bug",
+        "special": false
+    },
+    "Sludge Bomb": {
+        "name": "Sludge Bomb",
+        "base": "90",
+        "accuracy": "100",
+        "type": "poison",
+        "special": true
+    },
+    "Pursuit": {
+        "name": "Pursuit",
+        "base": "40",
+        "accuracy": "100",
+        "type": "dark",
+        "special": false
+    },
+    "Focus Energy": {
+        "name": "Focus Energy",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Fly": {
+        "name": "Fly",
+        "base": "90",
+        "accuracy": "95",
+        "type": "flying",
+        "special": false
+    },
+    "Return": {
+        "name": "Return",
+        "base": "1",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Steel Wing": {
+        "name": "Steel Wing",
+        "base": "70",
+        "accuracy": "90",
+        "type": "steel",
+        "special": false
+    },
+    "Sand-attack": {
+        "name": "Sand-attack",
+        "base": "0",
+        "accuracy": "100",
+        "type": "ground",
+        "special": false
+    },
+    "Frustration": {
+        "name": "Frustration",
+        "base": "1",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Mirror Move": {
+        "name": "Mirror Move",
+        "base": "0",
+        "accuracy": "0",
+        "type": "flying",
+        "special": false
+    },
+    "Swift": {
+        "name": "Swift",
+        "base": "60",
+        "accuracy": "0",
+        "type": "normal",
+        "special": true
+    },
+    "Whirlwind": {
+        "name": "Whirlwind",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Super Fang": {
+        "name": "Super Fang",
+        "base": "1",
+        "accuracy": "90",
+        "type": "normal",
+        "special": false
+    },
+    "Shadow Ball": {
+        "name": "Shadow Ball",
+        "base": "80",
+        "accuracy": "100",
+        "type": "ghost",
+        "special": true
+    },
+    "Hyper Fang": {
+        "name": "Hyper Fang",
+        "base": "80",
+        "accuracy": "90",
+        "type": "normal",
+        "special": false
+    },
+    "Drill Peck": {
+        "name": "Drill Peck",
+        "base": "80",
+        "accuracy": "100",
+        "type": "flying",
+        "special": false
+    },
+    "Earthquake": {
+        "name": "Earthquake",
+        "base": "100",
+        "accuracy": "100",
+        "type": "ground",
+        "special": false
+    },
+    "Glare": {
+        "name": "Glare",
+        "base": "0",
+        "accuracy": "90",
+        "type": "normal",
+        "special": false
+    },
+    "Thunderbolt": {
+        "name": "Thunderbolt",
+        "base": "95",
+        "accuracy": "100",
+        "type": "electric",
+        "special": true
+    },
+    "Iron Tail": {
+        "name": "Iron Tail",
+        "base": "100",
+        "accuracy": "75",
+        "type": "steel",
+        "special": false
+    },
+    "Thunder Wave": {
+        "name": "Thunder Wave",
+        "base": "0",
+        "accuracy": "100",
+        "type": "electric",
+        "special": false
+    },
+    "Thunder": {
+        "name": "Thunder",
+        "base": "120",
+        "accuracy": "70",
+        "type": "electric",
+        "special": true
+    },
+    "Quick Attack": {
+        "name": "Quick Attack",
+        "base": "40",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Tail Whip": {
+        "name": "Tail Whip",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Sandstorm": {
+        "name": "Sandstorm",
+        "base": "0",
+        "accuracy": "0",
+        "type": "rock",
+        "special": false
+    },
+    "Fury Swipes": {
+        "name": "Fury Swipes",
+        "base": "18",
+        "accuracy": "80",
+        "type": "normal",
+        "special": false
+    },
+    "Body Slam": {
+        "name": "Body Slam",
+        "base": "85",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Ice Punch": {
+        "name": "Ice Punch",
+        "base": "75",
+        "accuracy": "100",
+        "type": "ice",
+        "special": false
+    },
+    "Horn Drill": {
+        "name": "Horn Drill",
+        "base": "1",
+        "accuracy": "30",
+        "type": "normal",
+        "special": false
+    },
+    "Double Kick": {
+        "name": "Double Kick",
+        "base": "30",
+        "accuracy": "100",
+        "type": "fighting",
+        "special": false
+    },
+    "Horn Attack": {
+        "name": "Horn Attack",
+        "base": "65",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Metronome": {
+        "name": "Metronome",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Moonlight": {
+        "name": "Moonlight",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Encore": {
+        "name": "Encore",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Confuse Ray": {
+        "name": "Confuse Ray",
+        "base": "0",
+        "accuracy": "100",
+        "type": "ghost",
+        "special": false
+    },
+    "Roar": {
+        "name": "Roar",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Safeguard": {
+        "name": "Safeguard",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Rollout": {
+        "name": "Rollout",
+        "base": "30",
+        "accuracy": "90",
+        "type": "rock",
+        "special": false
+    },
+    "Defense Curl": {
+        "name": "Defense Curl",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Sing": {
+        "name": "Sing",
+        "base": "0",
+        "accuracy": "55",
+        "type": "normal",
+        "special": false
+    },
+    "Double-Edge": {
+        "name": "Double-Edge",
+        "base": "120",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Disable": {
+        "name": "Disable",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Haze": {
+        "name": "Haze",
+        "base": "0",
+        "accuracy": "0",
+        "type": "ice",
+        "special": false
+    },
+    "Sleep Powder": {
+        "name": "Sleep Powder",
+        "base": "0",
+        "accuracy": "75",
+        "type": "grass",
+        "special": false
+    },
+    "Petal Dance": {
+        "name": "Petal Dance",
+        "base": "120",
+        "accuracy": "100",
+        "type": "grass",
+        "special": true
+    },
+    "Acid": {
+        "name": "Acid",
+        "base": "40",
+        "accuracy": "100",
+        "type": "poison",
+        "special": true
+    },
+    "Sweet Scent": {
+        "name": "Sweet Scent",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Spore": {
+        "name": "Spore",
+        "base": "0",
+        "accuracy": "100",
+        "type": "grass",
+        "special": false
+    },
+    "Supersonic": {
+        "name": "Supersonic",
+        "base": "0",
+        "accuracy": "55",
+        "type": "normal",
+        "special": false
+    },
+    "Leech Life": {
+        "name": "Leech Life",
+        "base": "20",
+        "accuracy": "100",
+        "type": "bug",
+        "special": false
+    },
+    "Foresight": {
+        "name": "Foresight",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Fissure": {
+        "name": "Fissure",
+        "base": "1",
+        "accuracy": "30",
+        "type": "ground",
+        "special": false
+    },
+    "Magnitude": {
+        "name": "Magnitude",
+        "base": "1",
+        "accuracy": "100",
+        "type": "ground",
+        "special": false
+    },
+    "Attract": {
+        "name": "Attract",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Curse": {
+        "name": "Curse",
+        "base": "0",
+        "accuracy": "0",
+        "type": "ghost",
+        "special": false
+    },
+    "Faint Attack": {
+        "name": "Faint Attack",
+        "base": "60",
+        "accuracy": "0",
+        "type": "dark",
+        "special": false
+    },
+    "Screech": {
+        "name": "Screech",
+        "base": "0",
+        "accuracy": "85",
+        "type": "normal",
+        "special": false
+    },
+    "Swagger": {
+        "name": "Swagger",
+        "base": "0",
+        "accuracy": "90",
+        "type": "normal",
+        "special": false
+    },
+    "Psych Up": {
+        "name": "Psych Up",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Confusion": {
+        "name": "Confusion",
+        "base": "50",
+        "accuracy": "100",
+        "type": "psychic",
+        "special": true
+    },
+    "Cross Chop": {
+        "name": "Cross Chop",
+        "base": "100",
+        "accuracy": "80",
+        "type": "fighting",
+        "special": false
+    },
+    "Double Team": {
+        "name": "Double Team",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Thrash": {
+        "name": "Thrash",
+        "base": "120",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Flame Wheel": {
+        "name": "Flame Wheel",
+        "base": "60",
+        "accuracy": "100",
+        "type": "fire",
+        "special": false
+    },
+    "Extremespeed": {
+        "name": "Extremespeed",
+        "base": "80",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Leer": {
+        "name": "Leer",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Hypnosis": {
+        "name": "Hypnosis",
+        "base": "0",
+        "accuracy": "60",
+        "type": "psychic",
+        "special": false
+    },
+    "Snore": {
+        "name": "Snore",
+        "base": "40",
+        "accuracy": "100",
+        "type": "normal",
+        "special": true
+    },
+    "Belly Drum": {
+        "name": "Belly Drum",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Rest": {
+        "name": "Rest",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Dynamicpunch": {
+        "name": "Dynamicpunch",
+        "base": "100",
+        "accuracy": "50",
+        "type": "fighting",
+        "special": false
+    },
+    "Doubleslap": {
+        "name": "Doubleslap",
+        "base": "15",
+        "accuracy": "85",
+        "type": "normal",
+        "special": false
+    },
+    "Mind Reader": {
+        "name": "Mind Reader",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Thunderpunch": {
+        "name": "Thunderpunch",
+        "base": "75",
+        "accuracy": "100",
+        "type": "electric",
+        "special": false
+    },
+    "Reflect": {
+        "name": "Reflect",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Kinesis": {
+        "name": "Kinesis",
+        "base": "0",
+        "accuracy": "80",
+        "type": "psychic",
+        "special": false
+    },
+    "Psybeam": {
+        "name": "Psybeam",
+        "base": "65",
+        "accuracy": "100",
+        "type": "psychic",
+        "special": true
+    },
+    "Future Sight": {
+        "name": "Future Sight",
+        "base": "100",
+        "accuracy": "100",
+        "type": "psychic",
+        "special": true
+    },
+    "Thief": {
+        "name": "Thief",
+        "base": "40",
+        "accuracy": "100",
+        "type": "dark",
+        "special": false
+    },
+    "Seismic Toss": {
+        "name": "Seismic Toss",
+        "base": "1",
+        "accuracy": "100",
+        "type": "fighting",
+        "special": false
+    },
+    "Vital Throw": {
+        "name": "Vital Throw",
+        "base": "70",
+        "accuracy": "0",
+        "type": "fighting",
+        "special": false
+    },
+    "Submission": {
+        "name": "Submission",
+        "base": "80",
+        "accuracy": "80",
+        "type": "fighting",
+        "special": false
+    },
+    "Bubblebeam": {
+        "name": "Bubblebeam",
+        "base": "65",
+        "accuracy": "100",
+        "type": "water",
+        "special": true
+    },
+    "Wrap": {
+        "name": "Wrap",
+        "base": "15",
+        "accuracy": "90",
+        "type": "normal",
+        "special": false
+    },
+    "Barrier": {
+        "name": "Barrier",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Explosion": {
+        "name": "Explosion",
+        "base": "250",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Selfdestruct": {
+        "name": "Selfdestruct",
+        "base": "200",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Rock Throw": {
+        "name": "Rock Throw",
+        "base": "50",
+        "accuracy": "90",
+        "type": "rock",
+        "special": false
+    },
+    "Rock Smash": {
+        "name": "Rock Smash",
+        "base": "40",
+        "accuracy": "100",
+        "type": "fighting",
+        "special": false
+    },
+    "Fire Spin": {
+        "name": "Fire Spin",
+        "base": "35",
+        "accuracy": "85",
+        "type": "fire",
+        "special": true
+    },
+    "Stomp": {
+        "name": "Stomp",
+        "base": "65",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Amnesia": {
+        "name": "Amnesia",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Flash": {
+        "name": "Flash",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Swords Dance": {
+        "name": "Swords Dance",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Tri Attack": {
+        "name": "Tri Attack",
+        "base": "80",
+        "accuracy": "100",
+        "type": "normal",
+        "special": true
+    },
+    "Ice Beam": {
+        "name": "Ice Beam",
+        "base": "95",
+        "accuracy": "100",
+        "type": "ice",
+        "special": true
+    },
+    "Aurora Beam": {
+        "name": "Aurora Beam",
+        "base": "65",
+        "accuracy": "100",
+        "type": "ice",
+        "special": true
+    },
+    "Sleep Talk": {
+        "name": "Sleep Talk",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Sludge": {
+        "name": "Sludge",
+        "base": "65",
+        "accuracy": "100",
+        "type": "poison",
+        "special": true
+    },
+    "Acid Armor": {
+        "name": "Acid Armor",
+        "base": "0",
+        "accuracy": "0",
+        "type": "poison",
+        "special": false
+    },
+    "Clamp": {
+        "name": "Clamp",
+        "base": "35",
+        "accuracy": "85",
+        "type": "water",
+        "special": false
+    },
+    "Spike Cannon": {
+        "name": "Spike Cannon",
+        "base": "20",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Spite": {
+        "name": "Spite",
+        "base": "0",
+        "accuracy": "100",
+        "type": "ghost",
+        "special": false
+    },
+    "Destiny Bond": {
+        "name": "Destiny Bond",
+        "base": "0",
+        "accuracy": "0",
+        "type": "ghost",
+        "special": false
+    },
+    "Night Shade": {
+        "name": "Night Shade",
+        "base": "1",
+        "accuracy": "100",
+        "type": "ghost",
+        "special": true
+    },
+    "Nightmare": {
+        "name": "Nightmare",
+        "base": "0",
+        "accuracy": "100",
+        "type": "ghost",
+        "special": false
+    },
+    "Dream Eater": {
+        "name": "Dream Eater",
+        "base": "100",
+        "accuracy": "100",
+        "type": "psychic",
+        "special": true
+    },
+    "Crabhammer": {
+        "name": "Crabhammer",
+        "base": "90",
+        "accuracy": "90",
+        "type": "water",
+        "special": false
+    },
+    "Guillotine": {
+        "name": "Guillotine",
+        "base": "1",
+        "accuracy": "30",
+        "type": "normal",
+        "special": false
+    },
+    "Vicegrip": {
+        "name": "Vicegrip",
+        "base": "55",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Mirror Coat": {
+        "name": "Mirror Coat",
+        "base": "1",
+        "accuracy": "100",
+        "type": "psychic",
+        "special": true
+    },
+    "Sonicboom": {
+        "name": "Sonicboom",
+        "base": "1",
+        "accuracy": "90",
+        "type": "normal",
+        "special": true
+    },
+    "Egg Bomb": {
+        "name": "Egg Bomb",
+        "base": "100",
+        "accuracy": "75",
+        "type": "normal",
+        "special": false
+    },
+    "Bonemerang": {
+        "name": "Bonemerang",
+        "base": "50",
+        "accuracy": "90",
+        "type": "ground",
+        "special": false
+    },
+    "Bone Rush": {
+        "name": "Bone Rush",
+        "base": "25",
+        "accuracy": "90",
+        "type": "ground",
+        "special": false
+    },
+    "Hi Jump Kick": {
+        "name": "Hi Jump Kick",
+        "base": "130",
+        "accuracy": "90",
+        "type": "fighting",
+        "special": false
+    },
+    "Mega Kick": {
+        "name": "Mega Kick",
+        "base": "120",
+        "accuracy": "75",
+        "type": "normal",
+        "special": false
+    },
+    "Reversal": {
+        "name": "Reversal",
+        "base": "1",
+        "accuracy": "100",
+        "type": "fighting",
+        "special": false
+    },
+    "Meditate": {
+        "name": "Meditate",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Mach Punch": {
+        "name": "Mach Punch",
+        "base": "40",
+        "accuracy": "100",
+        "type": "fighting",
+        "special": false
+    },
+    "Counter": {
+        "name": "Counter",
+        "base": "1",
+        "accuracy": "100",
+        "type": "fighting",
+        "special": false
+    },
+    "Zap Cannon": {
+        "name": "Zap Cannon",
+        "base": "120",
+        "accuracy": "50",
+        "type": "electric",
+        "special": true
+    },
+    "Dizzy Punch": {
+        "name": "Dizzy Punch",
+        "base": "70",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Flail": {
+        "name": "Flail",
+        "base": "1",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Recover": {
+        "name": "Recover",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Baton Pass": {
+        "name": "Baton Pass",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Substitute": {
+        "name": "Substitute",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Lick": {
+        "name": "Lick",
+        "base": "20",
+        "accuracy": "100",
+        "type": "ghost",
+        "special": false
+    },
+    "Mean Look": {
+        "name": "Mean Look",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Light Screen": {
+        "name": "Light Screen",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Smog": {
+        "name": "Smog",
+        "base": "20",
+        "accuracy": "70",
+        "type": "poison",
+        "special": true
+    },
+    "Take Down": {
+        "name": "Take Down",
+        "base": "90",
+        "accuracy": "85",
+        "type": "normal",
+        "special": false
+    },
+    "Splash": {
+        "name": "Splash",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Dragon Rage": {
+        "name": "Dragon Rage",
+        "base": "1",
+        "accuracy": "100",
+        "type": "dragon",
+        "special": true
+    },
+    "Twister": {
+        "name": "Twister",
+        "base": "40",
+        "accuracy": "100",
+        "type": "dragon",
+        "special": true
+    },
+    "Whirlpool": {
+        "name": "Whirlpool",
+        "base": "35",
+        "accuracy": "85",
+        "type": "water",
+        "special": true
+    },
+    "Perish Song": {
+        "name": "Perish Song",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Mist": {
+        "name": "Mist",
+        "base": "0",
+        "accuracy": "0",
+        "type": "ice",
+        "special": false
+    },
+    "Transform": {
+        "name": "Transform",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Pin Missile": {
+        "name": "Pin Missile",
+        "base": "14",
+        "accuracy": "85",
+        "type": "bug",
+        "special": false
+    },
+    "Sharpen": {
+        "name": "Sharpen",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Conversion 2": {
+        "name": "Conversion 2",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Ancientpower": {
+        "name": "Ancientpower",
+        "base": "60",
+        "accuracy": "100",
+        "type": "rock",
+        "special": true
+    },
+    "Protect": {
+        "name": "Protect",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Water Gun": {
+        "name": "Water Gun",
+        "base": "40",
+        "accuracy": "100",
+        "type": "water",
+        "special": true
+    },
+    "Endure": {
+        "name": "Endure",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Peck": {
+        "name": "Peck",
+        "base": "35",
+        "accuracy": "100",
+        "type": "flying",
+        "special": false
+    },
+    "Agility": {
+        "name": "Agility",
+        "base": "0",
+        "accuracy": "0",
+        "type": "psychic",
+        "special": false
+    },
+    "Detect": {
+        "name": "Detect",
+        "base": "0",
+        "accuracy": "0",
+        "type": "fighting",
+        "special": false
+    },
+    "Sky Attack": {
+        "name": "Sky Attack",
+        "base": "140",
+        "accuracy": "90",
+        "type": "flying",
+        "special": false
+    },
+    "Outrage": {
+        "name": "Outrage",
+        "base": "120",
+        "accuracy": "100",
+        "type": "dragon",
+        "special": false
+    },
+    "Synthesis": {
+        "name": "Synthesis",
+        "base": "0",
+        "accuracy": "0",
+        "type": "grass",
+        "special": false
+    },
+    "Spider Web": {
+        "name": "Spider Web",
+        "base": "0",
+        "accuracy": "0",
+        "type": "bug",
+        "special": false
+    },
+    "Spark": {
+        "name": "Spark",
+        "base": "65",
+        "accuracy": "100",
+        "type": "electric",
+        "special": false
+    },
+    "Sweet Kiss": {
+        "name": "Sweet Kiss",
+        "base": "0",
+        "accuracy": "75",
+        "type": "normal",
+        "special": false
+    },
+    "Charm": {
+        "name": "Charm",
+        "base": "0",
+        "accuracy": "100",
+        "type": "normal",
+        "special": false
+    },
+    "Cotton Spore": {
+        "name": "Cotton Spore",
+        "base": "0",
+        "accuracy": "100",
+        "type": "grass",
+        "special": false
+    },
+    "Cut": {
+        "name": "Cut",
+        "base": "50",
+        "accuracy": "95",
+        "type": "normal",
+        "special": false
+    },
+    "Rock Slide": {
+        "name": "Rock Slide",
+        "base": "75",
+        "accuracy": "90",
+        "type": "rock",
+        "special": false
+    },
+    "Mimic": {
+        "name": "Mimic",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Mega Drain": {
+        "name": "Mega Drain",
+        "base": "40",
+        "accuracy": "100",
+        "type": "grass",
+        "special": true
+    },
+    "Slam": {
+        "name": "Slam",
+        "base": "80",
+        "accuracy": "75",
+        "type": "normal",
+        "special": false
+    },
+    "Psywave": {
+        "name": "Psywave",
+        "base": "1",
+        "accuracy": "80",
+        "type": "psychic",
+        "special": true
+    },
+    "Pain Split": {
+        "name": "Pain Split",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Hidden Power": {
+        "name": "Hidden Power",
+        "base": "1",
+        "accuracy": "100",
+        "type": "normal",
+        "special": true
+    },
+    "Crunch": {
+        "name": "Crunch",
+        "base": "80",
+        "accuracy": "100",
+        "type": "dark",
+        "special": false
+    },
+    "Spikes": {
+        "name": "Spikes",
+        "base": "0",
+        "accuracy": "0",
+        "type": "ground",
+        "special": false
+    },
+    "Minimize": {
+        "name": "Minimize",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Metal Claw": {
+        "name": "Metal Claw",
+        "base": "50",
+        "accuracy": "95",
+        "type": "steel",
+        "special": false
+    },
+    "Bide": {
+        "name": "Bide",
+        "base": "1",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Megahorn": {
+        "name": "Megahorn",
+        "base": "120",
+        "accuracy": "85",
+        "type": "bug",
+        "special": false
+    },
+    "Beat Up": {
+        "name": "Beat Up",
+        "base": "1",
+        "accuracy": "100",
+        "type": "dark",
+        "special": false
+    },
+    "Fury Attack": {
+        "name": "Fury Attack",
+        "base": "15",
+        "accuracy": "85",
+        "type": "normal",
+        "special": false
+    },
+    "Lock-on": {
+        "name": "Lock-on",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Octazooka": {
+        "name": "Octazooka",
+        "base": "65",
+        "accuracy": "85",
+        "type": "water",
+        "special": true
+    },
+    "Present": {
+        "name": "Present",
+        "base": "1",
+        "accuracy": "90",
+        "type": "normal",
+        "special": false
+    },
+    "Ember": {
+        "name": "Ember",
+        "base": "40",
+        "accuracy": "100",
+        "type": "fire",
+        "special": true
+    },
+    "Conversion": {
+        "name": "Conversion",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    },
+    "Triple Kick": {
+        "name": "Triple Kick",
+        "base": "10",
+        "accuracy": "90",
+        "type": "fighting",
+        "special": false
+    },
+    "Heal Bell": {
+        "name": "Heal Bell",
+        "base": "0",
+        "accuracy": "0",
+        "type": "normal",
+        "special": false
+    }
+}

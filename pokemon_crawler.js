@@ -12,6 +12,7 @@ function crawlDelay(){
 
 var pokemonIndex = 0;
 var pokemon = [];
+var pokemonDatabase = {};
 
 var moveArray = [];
 var moveIndex = 0;
@@ -28,7 +29,6 @@ var proxy = {
 	list: [	{"ip":"http://199.200.120.140:3127","misses":0},
 			{"ip":"http://198.52.217.44:3127","misses":0},
 			{"ip":"http://162.208.49.45:7808","misses":0},
-			//{"ip":"http://107.182.16.221:7808","misses":0},
 			{"ip":"http://204.12.235.23:7808","misses":0},
 			{"ip":"http://23.89.198.161:7808","misses":0},
 			{"ip":"http://38.109.218.156:7808","misses":0},
@@ -103,7 +103,10 @@ function processRentPage(){
 				currentPokemon.specialDefense = statElements[4];
 
 				currentPokemon.attacks = []; // partially filled now, improved by later step
-				currentPokemon.weakness = [];
+				currentPokemon.weakness = {};
+
+				var skipCurrent = false;
+
 
 				// fill attacks array
 				$(this).find('table').eq(2).find('a').each(function(){
@@ -123,7 +126,18 @@ function processRentPage(){
 
 				currentPokemon.types = []; // filled out by later step
 				
-				pokemon.push(currentPokemon);
+				var inDatabase = false;
+				for(var i = 0; i < pokemon.length; i++){
+					if(currentPokemon.name == pokemon[i].name){
+						inDatabase = true;
+						continue;
+					}
+				}
+
+				if( ! inDatabase ){
+					pokemon.push(currentPokemon);
+				}
+				
 			});
 
 			console.log('\t[Success] got pokemon list, move urls');
@@ -142,6 +156,7 @@ function processRentPage(){
 
 function processPokemon(){
 	var currentPokemon = pokemon[pokemonIndex];
+
 	console.log("==== Currently working on " + currentPokemon.name)
 
 	// call function to retrieve the pokemon's information
@@ -158,6 +173,17 @@ function processPokemon(){
 				var newType = $(this).attr('href').replace("/pokedex-bw/", "").replace(".shtml", "");
 				currentPokemon.types.push( newType );
 			});
+
+			var $weaknessElem = $('.dextable').eq(2).find('tr');
+			var $typeResultset = $weaknessElem.eq(1).find('td');
+			var $multResultset = $weaknessElem.eq(2).find('td');
+			
+			for(var i = 0; i < $typeResultset.length; i++){
+				var typeName = $typeResultset.eq(i).find('a').attr('href').replace("/attackdex-bw/", "").replace(".shtml", "");
+				var typeMult = $multResultset.eq(i).text().replace("*", "");
+				currentPokemon.weakness[typeName] = typeMult;
+			}
+
 
 			console.log('\t[Success] got dex information for ' + currentPokemon.name);
 			//pokemon[pokemonIndex] = currentPokemon; // store back updated information
@@ -254,7 +280,23 @@ function processMoveset(){
 
 
 function finishUp(){
-	console.log("Crawling process is finished.");
+	console.log("Crawling process is finished, writing results to file.");
+
+	pokemon.forEach(function(mon){
+		pokemonDatabase[mon.name] = mon;
+	})
+
+	fs.writeFile("./pokemon_database.json", JSON.stringify(pokemonDatabase, null, 4), function(err) {
+	    if( ! err ) {
+	      console.log("Pokemon JSON saved");
+	    }
+	}); 
+
+	fs.writeFile("./move_database.json", JSON.stringify(moveset, null, 4), function(err) {
+	    if( ! err ) {
+	      console.log("Moveset JSON saved");
+	    }
+	}); 
 }
 
 

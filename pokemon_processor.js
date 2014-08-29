@@ -1,15 +1,22 @@
-var fs = 			require('fs');
-var pokemonNames = 	require("./pokemon_array.json");
-var exec = 			require('child_process').exec;
+var fs = 				require('fs');
+var pokemonNames = 		require("./pokemon_array.json");
+var exec = 				require('child_process').exec;
+
+var pokemonDatabase = 	require("./pokemon_database.json");
+var moveDatabase = 		require("./move_database.json");
 
 
 var blue = {
 	ocr: [],
-	guess: []
+	guess: [],
+	attackDamage: 0,
+	health: 0
 };
 var red = {
 	ocr: [],
-	guess: []
+	guess: [],
+	attackDamage: 0,
+	health: 0
 };
 
 
@@ -52,7 +59,7 @@ function editDistance(a, b) {
 };
 
 function closestString(needle, haystack){
-	var closestDistance = 999999;
+	var closestDistance = Number.MAX_VALUE;
 	var bestName = "";
 	haystack.forEach(function(element, index, array){
 		var dist = editDistance(needle.toLowerCase(), element.toLowerCase());
@@ -70,8 +77,47 @@ function pokemonDistanceCheck(closeObj){
 	return closeObj.distance < (1/2 * closeObj.string.length) 
 }
 
+function calculateAttackDamage(firstPokemon, secondPokemon, attack){
+	// pokemon gen 2 damage formula
+
+	attack = moveDatabase[attack];
+
+	var attackBase;
+		var level = 		100;
+		var special = 		attack.special;
+		var attackStat =  	( ! special ) ? firstPokemon.attack : firstPokemon.specialAttack;
+			attackStat = 	Number(attackStat);
+		var defenseStat = 	( ! special ) ? secondPokemon.defense : secondPokemon.specialDefense;
+			defenseStat = 	Number(defenseStat);
+		var base = 			Number(attack.base);
+		attackBase = ( ( (2 * level + 10) / 250 ) * (attackStat / defenseStat) * base + 2);
+
+	var modifier;
+		var STAB = 		( firstPokemon.types.indexOf( attack.type ) !== -1 ) ? 1.5 : 1;
+		var typeMult = 	Number(secondPokemon.weakness[ attack.type ]);
+		modifier = STAB * typeMult;
+
+	var damage = 	 attackBase * modifier;
+
+	var averageDamage = damage * (attack.accuracy / 100);
+
+	return averageDamage;
+}
+
+function pokemonFirstAttacksSecond(firstPokemon, secondPokemon){
+	var maxDamage = 0;
+	firstPokemon.attacks.forEach(function(attack){
+		var damage = calculateAttackDamage(firstPokemon, secondPokemon, attack.name);
+		if(damage > maxDamage){
+			maxDamage = damage;
+		}
+	});
+	return maxDamage;
+}
+
 function loop(){
-	takeScreenshotAndProcess();
+	setInterval(takeScreenshotAndProcess, 3000);
+	// takeScreenshotAndProcess();
 	//setTimeout(takeScreenshotAndProcess, 5000);
 		//takeScreenshotAndProcess();
 }
@@ -106,13 +152,14 @@ function lookForPokemonNames(){
 	var successfulNames = 0;
 	var blueEditDistance = 0;
 	var redEditDistance = 0;
+
 	blue.ocr.forEach(
 		function(element){
 			var closest = closestString(element, pokemonNames);
-			blue.guess.push(closest.string);
 			//console.log( "Closest to " + element + " \n\t" + closest.string + " with edit ditance " + closest.distance.toString() );
 			blueEditDistance += closest.distance;
 			if( pokemonDistanceCheck(closest) ){
+				blue.guess.push( pokemonDatabase[closest.string] );
 				successfulNames++;
 			}
 		}
@@ -121,10 +168,10 @@ function lookForPokemonNames(){
 	red.ocr.forEach(
 		function(element){
 			var closest = closestString(element, pokemonNames);
-			red.guess.push(closest.string);
 			//console.log( "Closest to " + element + " \n\t" + closest.string + " with edit ditance " + closest.distance.toString() );
 			redEditDistance += closest.distance;
 			if( pokemonDistanceCheck(closest) ){
+				red.guess.push( pokemonDatabase[closest.string] );
 				successfulNames++;
 			}
 		}
@@ -132,14 +179,54 @@ function lookForPokemonNames(){
 
 	if(successfulNames == 6){
 		console.log("Successfully identified 6 Pokemon")
-		console.log("BLUE: " + blue.guess.join(","));
-		console.log("RED : " + red.guess.join(","));
+		//console.log("BLUE: " + blue.guess.join(","));
+		//console.log("RED : " + red.guess.join(","));
+
+		calculateTeamStatistics();
+		cleanupForNextRun();
 	} else {
-		console.log("Name test failed! Only received " + successfulNames + " successfulNames!");
+		//console.log("Name test failed! Only identified " + successfulNames + " names, starting new loop...");
+		cleanupForNextRun();
 		
 	}
-	cleanupForNextRun()
-	setTimeout(loop, 5000)
+}
+
+function calculateTeamStatistics(){
+	blue.guess.forEach(function(bluePokemon){
+		red.guess.forEach(function(redPokemon){
+
+			var bestAttackDamageTotalBlue = pokemonFirstAttacksSecond(bluePokemon, redPokemon);
+			var bestAttackDamageTotalRed  = pokemonFirstAttacksSecond(redPokemon, bluePokemon);
+
+			blue.attackDamage += bestAttackDamageTotalBlue;
+			red.attackDamage  += bestAttackDamageTotalRed;
+
+			blue.health = Number(blue.health) + Number(bluePokemon.hp) * 3; // we calculate each pkmn vs each, mult health by 3 (3 vs 3)
+			red.health  = Number(red.health) + Number(redPokemon.hp) * 3;
+
+		});
+	});
+
+	determineWinner();
+}
+
+function determineWinner(){
+	var blueRatio = blue.attackDamage / red.health;
+	var redRatio  = red.attackDamage / blue.health;
+
+	//console.log(blue.attackDamage, red.health, red.attackDamage, blue.health);
+
+	var prediction = "";
+		prediction += (blueRatio > redRatio) ? "Bot predicts BLUE victorious" : "Bot predicts RED victorious";
+		prediction += "\n Confidence level: " + ((blueRatio > redRatio) ? (redRatio / blueRatio).toString() : (blueRatio / redRatio).toString());
+
+	console.log("Blue Ratio: ", blueRatio);
+	console.log("Red Ratio : ", redRatio);
+
+
+	console.log(prediction);
+
+	return prediction;
 }
 
 function cleanupForNextRun(){
@@ -147,6 +234,10 @@ function cleanupForNextRun(){
 	red.guess.length = 0;
 	red.ocr.length = 0;
 	blue.ocr.length = 0;
+	blue.attackDamage = 0;
+	red.attackDamage = 0;
+	blue.health = 0;
+	red.health = 0;
 }
 
 
