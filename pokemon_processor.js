@@ -2,6 +2,53 @@ var fs = 				require('fs');
 var pokemonNames = 		require("./pokemon_array.json");
 var exec = 				require('child_process').exec;
 
+var balance = 100;
+var state = "";
+
+var irc = require('irc');
+var settings = {
+	channels : ["#twitchplayspokemon"],
+	server : "irc.twitch.tv",
+	port: 6667,
+	secure: false,
+	nick : "daguava",
+	password : "oauth:iazmm085g57yiy8m5bnswyxdfvjidt7"
+}
+
+var client = new irc.Client(settings.server, settings.nick, {
+    channels: [settings.channels + " " + settings.password],
+    port: settings.port,
+    debug: true,
+    password: settings.password,
+    userName: settings.nick,
+    realName: settings.nick,
+    secure: settings.secure,
+    showErrors: true,
+	floodProtection: true,
+	floodProtectionDelay: 500,
+});
+
+client.addListener('message', function (from, to, message) {
+
+	if(from == "tppinfobot"){
+		console.log(from + ": " + message);
+		if( message.indexOf("new match") !== -1 ){
+			askForBalance();
+			state = "normal";
+		}
+	}
+	if(from == "tppbankbot" && message.toLowerCase().indexOf(settings.nick.toLowerCase()) !== -1){
+		var newBalance = Number( message.split(" ").pop() );
+		console.log("Updated balance to " + newBalance.toString() );
+		if(newBalance > balance){
+			console.log("\t\t\t( ͡° ͜ʖ ͡°) you won your last bet!");
+		}
+		balance = newBalance;
+		console.log("==========================================================");
+	}
+
+});
+
 var pokemonDatabase = 	require("./pokemon_database.json");
 var moveDatabase = 		require("./move_database.json");
 
@@ -19,9 +66,25 @@ var red = {
 	health: 0
 };
 
+var uselessPokemon = [
+	"Metapod",
+	"Kakuna"
+]
 
+function padToSize(string, size){
+	while(string.length < size){
+		string += " ";
+	}
+	return string;
+}
 
-
+function askForBalance(){
+	
+	console.log("Requesting balance, adding randomized delay");
+	setTimeout(function(){
+		client.say(settings.channels[0], "!balance");
+	}, ( Math.random()*5000 + 5000 ));
+}
 
 
 function editDistance(a, b) {
@@ -106,32 +169,87 @@ function calculateAttackDamage(firstPokemon, secondPokemon, attack){
 
 function pokemonFirstAttacksSecond(firstPokemon, secondPokemon){
 	var maxDamage = 0;
-	firstPokemon.attacks.forEach(function(attack){
-		var damage = calculateAttackDamage(firstPokemon, secondPokemon, attack.name);
-		if(damage > maxDamage){
-			maxDamage = damage;
-		}
-	});
-	return maxDamage;
+	var attacksWithSpecialHandling = ["Solarbeam", "Hyper Beam"];
+
+	if( uselessPokemon.indexOf( secondPokemon.name ) !== -1 ){
+		return 50;
+	} else if( firstPokemon.name == "Ditto" ){
+		return 50; // a low estimate of decent damage?
+	}
+
+	if( ! firstPokemon || ! secondPokemon ){
+		console.log("WARNING: Pokemon database lookup may have failed");
+	} else {
+		var bestAttack = "";
+		firstPokemon.attacks.forEach(function(attack){
+			var damage = calculateAttackDamage(firstPokemon, secondPokemon, attack.name);
+
+			if( attacksWithSpecialHandling.indexOf( attack.name ) !== -1 ){
+				damage /= 2;  // attack happens every two turns
+			}
+
+			if(damage > maxDamage){
+				maxDamage = Math.round(damage);
+				bestAttack = attack.name;
+			}
+		});
+		console.log("\t" + padToSize(firstPokemon.name) + " attacks " + padToSize(secondPokemon.name) + " guess: (" + bestAttack + ":" + maxDamage + ")")
+	}
+
+	return Math.min(maxDamage, secondPokemon.hp);
 }
 
 function loop(){
-	setInterval(takeScreenshotAndProcess, 3000);
-	// takeScreenshotAndProcess();
-	//setTimeout(takeScreenshotAndProcess, 5000);
-		//takeScreenshotAndProcess();
+	setInterval(takeScreenshotAndProcess, 15000);
 }
 
 function takeScreenshotAndProcess(){
-	exec('convert screenshot: ./screenshot.jpg', function (error, stdout, stderr){
-	    //console.log("Grabbing the screen, looking for pokemon names...");
-	    imageMagickAndTesseract();
-	});
+	try{
+		exec('convert screenshot: ./screenshot.jpg', function (error, stdout, stderr){
+		    //console.log("Grabbing the screen, looking for pokemon names...");
+		    imageMagickAndTesseract();
+		});
+	} catch(e){
+		
+	}
+	
 }
 
 function imageMagickAndTesseract(){
 
-    exec('convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\screenshot.jpg" -crop 8.6%x2.8%+493+245 ./temp.png && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" ./blue_first bazaar && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\screenshot.jpg" -crop 8.6%x2.8%+661+245 ./temp.png && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" ./blue_second bazaar && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\screenshot.jpg" -crop 8.6%x2.8%+828+245 ./temp.png && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" ./blue_third bazaar && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\screenshot.jpg" -crop 8.6%x2.8%+930+640 ./temp.png && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" ./red_first bazaar && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\screenshot.jpg" -crop 8.6%x2.8%+1095+640 ./temp.png && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" ./red_second bazaar && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\screenshot.jpg" -crop 8.6%x2.8%+1265+640 ./temp.png && convert "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" -fill black -fuzz 14% +opaque white ./temp.png && tesseract "C:\\Users\\Mitchell Lutzke\\Documents\\Github\\BotPlaysPokemon\\temp.png" ./red_third bazaar', function(error, stdout, stderr){
+	var commands = [
+		// find first blue pokemon, crop, filter, ocr
+		"convert screenshot.jpg -crop 8.6%x2.8%+493+245 ./temp.png",
+		"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
+		"tesseract temp.png ./blue_first bazaar",	// semi-accurate blue_first pokemon name
+
+		//find second blue pokemon, crop, filter, ocr
+		"convert screenshot.jpg -crop 8.6%x2.8%+661+245 ./temp.png",
+		"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
+		"tesseract temp.png ./blue_second bazaar",	// semi-accurate blue_second pokemon name
+
+		// find third blue pokemon, crop, filter, ocr
+		"convert screenshot.jpg -crop 8.6%x2.8%+828+245 ./temp.png",
+		"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
+		"tesseract temp.png ./blue_third bazaar",	// semi-accurate blue_third pokemon name
+
+		// find first red pokemon, crop, filter, ocr
+		"convert screenshot.jpg -crop 8.6%x2.8%+930+640 ./temp.png",
+		"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
+		"tesseract temp.png ./red_first bazaar",	// semi-accurate red_first pokemon name
+
+		// find second red pokemon, crop, filter, ocr
+		"convert screenshot.jpg -crop 8.6%x2.8%+1095+640 ./temp.png",
+		"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
+		"tesseract temp.png ./red_second bazaar",	// semi-accurate red_second pokemon name
+
+		// find third red pokemon, crop, filter, ocr
+		"convert screenshot.jpg -crop 8.6%x2.8%+1265+640 ./temp.png",
+		"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
+		"tesseract temp.png ./red_third bazaar"		// semi-accurate red_third pokemon name
+	]
+
+    exec(commands.join(" && "), function(error, stdout, stderr){
 
 		//console.log("finished imagemagick, tesseract pass");
 
@@ -142,7 +260,12 @@ function imageMagickAndTesseract(){
 		red.ocr.push(  fs.readFileSync("./red_second.txt", "utf8").trim()  );
 		red.ocr.push(  fs.readFileSync("./red_third.txt", "utf8").trim()   );
 
-		lookForPokemonNames();
+		if(state != "bet_placed"){
+			lookForPokemonNames();
+		} else {
+			//console.log("Stopping process, bet already placed...");
+		}
+		
 
 	});
 }
@@ -153,6 +276,9 @@ function lookForPokemonNames(){
 	var blueEditDistance = 0;
 	var redEditDistance = 0;
 
+	var redNames = [];
+	var blueNames = [];
+
 	blue.ocr.forEach(
 		function(element){
 			var closest = closestString(element, pokemonNames);
@@ -160,6 +286,7 @@ function lookForPokemonNames(){
 			blueEditDistance += closest.distance;
 			if( pokemonDistanceCheck(closest) ){
 				blue.guess.push( pokemonDatabase[closest.string] );
+				blueNames.push( closest.string );
 				successfulNames++;
 			}
 		}
@@ -172,6 +299,7 @@ function lookForPokemonNames(){
 			redEditDistance += closest.distance;
 			if( pokemonDistanceCheck(closest) ){
 				red.guess.push( pokemonDatabase[closest.string] );
+				redNames.push( closest.string );
 				successfulNames++;
 			}
 		}
@@ -179,8 +307,19 @@ function lookForPokemonNames(){
 
 	if(successfulNames == 6){
 		console.log("Successfully identified 6 Pokemon")
-		//console.log("BLUE: " + blue.guess.join(","));
-		//console.log("RED : " + red.guess.join(","));
+		var blueString = "";
+		var redString = "";
+
+		blueNames.forEach(function(name){
+			blueString += padToSize(name, 14);
+		})
+
+		redNames.forEach(function(name){
+			redString += padToSize(name, 14);
+		})
+
+		console.log("\tBLUE: " + blueString);
+		console.log("\tRED : " + redString);
 
 		calculateTeamStatistics();
 		cleanupForNextRun();
@@ -201,11 +340,24 @@ function calculateTeamStatistics(){
 			blue.attackDamage += bestAttackDamageTotalBlue;
 			red.attackDamage  += bestAttackDamageTotalRed;
 
-			blue.health = Number(blue.health) + Number(bluePokemon.hp) * 3; // we calculate each pkmn vs each, mult health by 3 (3 vs 3)
-			red.health  = Number(red.health) + Number(redPokemon.hp) * 3;
+			
 
 		});
 	});
+
+	blue.guess.forEach(function(bluePokemon){
+		if( uselessPokemon.indexOf( bluePokemon.name ) === -1 ){
+			blue.health = Number(blue.health) + Number(bluePokemon.hp);
+		}	
+	})
+
+	red.guess.forEach(function(redPokemon){
+		if( uselessPokemon.indexOf( redPokemon.name ) === -1 ){
+			red.health  = Number(red.health) + Number(redPokemon.hp);
+		}
+	})
+
+	okToBet = true;
 
 	determineWinner();
 }
@@ -214,11 +366,19 @@ function determineWinner(){
 	var blueRatio = blue.attackDamage / red.health;
 	var redRatio  = red.attackDamage / blue.health;
 
-	//console.log(blue.attackDamage, red.health, red.attackDamage, blue.health);
+	console.log("Blue attack damage, health: " + blue.attackDamage + ", " + blue.health);
+	console.log("Red  attack damage, health: " + red.attackDamage  + ", " + red.health );
+
+	var lowest = Math.min(blueRatio, redRatio);
+
+		blueRatio /= lowest;
+		redRatio  /= lowest;
+
+	var highest = Math.max(blueRatio, redRatio);
 
 	var prediction = "";
 		prediction += (blueRatio > redRatio) ? "Bot predicts BLUE victorious" : "Bot predicts RED victorious";
-		prediction += "\n Confidence level: " + ((blueRatio > redRatio) ? (redRatio / blueRatio).toString() : (blueRatio / redRatio).toString());
+		prediction += "\n\tConfidence level: " + highest.toString();
 
 	console.log("Blue Ratio: ", blueRatio);
 	console.log("Red Ratio : ", redRatio);
@@ -226,7 +386,47 @@ function determineWinner(){
 
 	console.log(prediction);
 
-	return prediction;
+
+	////// instead, set flag arming our bet
+	placeBet( (blueRatio > redRatio) ? "blue" : "red", highest);
+
+	//return prediction;
+}
+
+function placeBet(team, confidence){
+	var bet = 0;
+	if(confidence > 1){
+		bet = balance * 0.10;
+	}
+	if(confidence > 1.3){
+		bet = balance * 0.15;
+	}
+	if(confidence > 1.5){
+		bet = balance * 0.23;
+	}
+	if(confidence > 1.6){
+		bet = balance * 0.3;
+	}
+	if(confidence > 2.1){
+		bet = balance * 0.75
+	}
+	if(confidence > 3){
+		bet = balance
+	}
+	
+	//if(bet < 100 && balance > 300) bet = 100;
+	if(bet > balance) bet = balance;
+	if( balance == 100) bet = 100;
+
+	bet = Math.min( Math.ceil(bet/10)*10, balance );
+
+	var betString = "!bet " + bet.toString() + " " + team;
+
+	console.log("Placing bet of " + betString + " with confidence of " + confidence.toString() );
+
+	client.say(settings.channels[0], "!bet " + parseInt(bet).toString() + " " + team);
+	state = "bet_placed";
+	cleanupForNextRun();
 }
 
 function cleanupForNextRun(){
@@ -243,7 +443,7 @@ function cleanupForNextRun(){
 
 
 
-
+askForBalance();
 loop();
 
 

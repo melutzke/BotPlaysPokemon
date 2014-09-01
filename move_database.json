@@ -470,7 +470,7 @@
     },
     "Horn Drill": {
         "name": "Horn Drill",
-        "base": "1",
+        "base": "700",
         "accuracy": "30",
         "type": "normal",
         "special": false
@@ -631,7 +631,7 @@
     },
     "Fissure": {
         "name": "Fissure",
-        "base": "1",
+        "base": "700",
         "accuracy": "30",
         "type": "ground",
         "special": false
@@ -1030,7 +1030,7 @@
     },
     "Guillotine": {
         "name": "Guillotine",
-        "base": "1",
+        "base": "700",
         "accuracy": "30",
         "type": "normal",
         "special": false

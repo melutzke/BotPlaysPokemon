@@ -1270,7 +1270,7 @@
             "ground"
         ]
     },
-    "Nidoran♀": {
+    "Nidoran": {
         "number": "029",
         "name": "Nidoran♀",
         "href": "http://www.serebii.net/pokedex-bw/029.shtml",
@@ -5586,9 +5586,9 @@
             "psychic"
         ]
     },
-    "Mr.": {
+    "Mr. Mime": {
         "number": "122",
-        "name": "Mr.",
+        "name": "Mr.Mime",
         "href": "http://www.serebii.net/pokedex-bw/122.shtml",
         "hp": "239",
         "attack": "146",
