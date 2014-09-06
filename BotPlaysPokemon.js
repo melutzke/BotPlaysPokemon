@@ -15,7 +15,7 @@ var screen = {
 	heightRatio: process.argv[3] / 1080
 }
 var heightOffset;
-if(mac) heightOffset = 71;
+if(mac) heightOffset = .1111 * heightRatio;
 
 console.log(screen);
 
