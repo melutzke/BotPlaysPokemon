@@ -176,47 +176,47 @@ var Bot = {
 			// take a screenshot
 			"convert screenshot: ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * widthRatio + "+" + 245 * heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_first bazaar",	// semi-accurate blue_first pokemon name
 
 			//find second blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 661 * widthRatio + "+" + 245 * heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 661 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_second bazaar",	// semi-accurate blue_second pokemon name
 
 			// find third blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 828 * widthRatio + "+" + 245 * heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 828 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_third bazaar",	// semi-accurate blue_third pokemon name
 
 			// find first red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 930 * widthRatio + "+" + 640 * heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 930 * screen.widthRatio + "+" + 640 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_first bazaar",	// semi-accurate red_first pokemon name
 
 			// find second red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1095 * widthRatio + "+" + 640 * heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1095 * screen.widthRatio + "+" + 640 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_second bazaar",	// semi-accurate red_second pokemon name
 
 			// find third red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1265 * widthRatio + "+" + 640 * heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1265 * screen.widthRatio + "+" + 640 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_third bazaar",		// semi-accurate red_third pokemon name
 
 			// find money bet on blue
-			"convert screenshot.jpg -crop 8%x4%+" + 23 * widthRatio + "+" + 1040 * heightRatio + " -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 8%x4%+" + 23 * screen.widthRatio + "+" + 1040 * screen.heightRatio + " -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./blue_money_bet bazaar",
 
 			// find money bet on red
-			"convert screenshot.jpg -crop 8%x4%+" + 1766 * widthRatio + "+" + 1042 * heightRatio + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 8%x4%+" + 1766 * screen.widthRatio + "+" + 1042 * screen.heightRatio + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./red_money_bet bazaar",
 
 			// see if "place your bets" text is up
-			"convert screenshot.jpg -crop 16.4%x6.7%+" + 330 * widthRatio + "+" + 90 * heightRatio + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 16.4%x6.7%+" + 330 * screen.widthRatio + "+" + 90 * screen.heightRatio + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./place_your_bets bazaar"
 		];
