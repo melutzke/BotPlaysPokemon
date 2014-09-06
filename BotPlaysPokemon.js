@@ -282,6 +282,18 @@ var Bot = {
 
         console.log("blueScore: " + blueScore + " redScore: " + redScore);
 
+        if(blueScore > redScore){
+            Bot.guess.team = "blue";
+            //Bot.guess.confidence = 0; //not sure wat do here, yet
+        }
+
+        else{
+            Bot.guess.team = "red";
+            //Bot.guess.confidence = 0; //not sure wat do here, yet
+        }
+
+        //TODO: Place the actual bet
+
     }
 
 }
@@ -405,7 +417,6 @@ function mainLoop(){
 
 //Very "easy" test cases. Bot should predict these 100% correctly.
 function easyTests(){
-
     //Initialize blue team's dummy data
     Bot.analysis.blue.pokemon.push(pokemonDatabase.Squirtle);
     assert.equal("Squirtle", Bot.analysis.blue.pokemon[0].name, "Failed to add Squirtle to team Blue.");
