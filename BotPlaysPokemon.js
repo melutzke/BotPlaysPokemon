@@ -5,8 +5,6 @@ var irc = 				require('irc'),
 	pokemonDatabase = 	require("./pokemon_database.json");
 	moveDatabase = 		require("./move_database.json")
 
-var debugging = true;
-
 function debug(){
 	if( debugging ){
 		console.log( Array.prototype.slice.call(arguments).join(" ") );
@@ -243,7 +241,19 @@ var Bot = {
 		debug("\t" + padToSize(firstPokemon.name) + " attacks " + padToSize(secondPokemon.name) + " guess: (" + bestAttack + ":" + maxDamage + ")")
 
 		return Math.min(maxDamage, secondPokemon.hp);
-	}
+	},
+
+    placeBet: function(){
+
+        /* Only bet up to 10% of the balance */
+        var baseBet = User.balance * 0.10;
+
+        var blueScore = Bot.analysis.blue.damage / Bot.analysis.red.health;
+        var redScore = Bot.analysis.red.damage / Bot.analysis.blue.health;
+
+        console.log("blueScore: " + blueScore + " redScore: " + redScore);
+
+    }
 
 }
 
@@ -256,6 +266,8 @@ var Bot = {
 		Use of interval prevents possability of stack overflow, since mainLoop will not call itself.
 */
 function mainLoop(){
+
+    var debugging = process.argv[4] == "-d";
 
 	if( Bot.busy ){
 		debug("Bot busy, skipping mainLoop");
@@ -357,8 +369,61 @@ function mainLoop(){
 	} else if( Bot.state == "place_bet" ){
 		debug("Placing bet");
 		console.log("All good in the hood, bro. You made it to the betting phase!");
-		throw "fake exception exception exception.";
+
+        Bot.placeBet();
 	}
 }
 
-setInterval( mainLoop, 3000 );
+//Very "easy" test cases. Bot should predict these 100% correctly.
+function easyTests(){
+    var assert = require('assert');
+
+    //Initialize blue team's dummy data
+    Bot.analysis.blue.pokemon.push(pokemonDatabase.Squirtle);
+    assert.equal("Squirtle", Bot.analysis.blue.pokemon[0].name, "Failed to add Squirtle to team Blue.");
+
+    Bot.analysis.blue.pokemon.push(pokemonDatabase.Wartortle);
+    assert.equal("Wartortle", Bot.analysis.blue.pokemon[1].name, "Failed to add Wartortle to team Blue.");
+
+    Bot.analysis.blue.pokemon.push(pokemonDatabase.Blastoise);
+    assert.equal("Blastoise", Bot.analysis.blue.pokemon[2].name, "Failed to add Blastoise to team Blue.");
+
+
+    //Initialize red team's dummy data
+    Bot.analysis.red.pokemon.push(pokemonDatabase.Charmander);
+    assert.equal("Charmander", Bot.analysis.red.pokemon[0].name, "Failed to add Charmander to team Red.");
+
+    Bot.analysis.red.pokemon.push(pokemonDatabase.Charmeleon);
+    assert.equal("Charmeleon", Bot.analysis.red.pokemon[1].name, "Failed to add Charmeleon to team Red.");
+
+    Bot.analysis.red.pokemon.push(pokemonDatabase.Charizard);
+    assert.equal("Charizard", Bot.analysis.red.pokemon[2].name, "Failed to add Charizard to team Red.");
+
+    Bot.state = "populate_team_data";
+    mainLoop(); //call the main loop with dummy data, and the state set to "populate_team_data"
+    mainLoop(); //Should place the bet this time, after all of the team data has been populated.
+}
+
+function debugMain(){
+    var assert = require('assert');
+
+    //Run a few unit tests
+    easyTests();
+
+    //TODO: Test the betting
+
+}
+
+var debugging = process.argv[4] == "-d";
+
+if(!debugging){
+    setInterval( mainLoop, 3000 );
+}
+
+else{
+    debug("Debugging!")
+    debugMain();
+
+    debug("All tests succeeded! Exiting...")
+    process.exit(0); //Exit cleanly
+}
