@@ -14,7 +14,7 @@ var screen = {
 	widthRatio: process.argv[2] / 1920,
 	heightRatio: process.argv[3] / 1080
 }
-var heightOffset;
+var heightOffset = 0;
 if(mac) heightOffset = .1777777777777 * screen.heightRatio;
 
 console.log(screen);
@@ -101,7 +101,7 @@ var specialCases = {
 var User = {
 	username: 	"daguava",
 	oauth: 		"oauth:iazmm085g57yiy8m5bnswyxdfvjidt7",
-	balance: 	NaN,
+	balance: 	100,
 	wins: 		0,
 	losses:		0
 }
@@ -194,7 +194,7 @@ var Bot = {
 	analyzeScreenshot: 	function(callback){
 		var commands = [
 			// take a screenshot
-			(mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
+			( ! mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
 			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
@@ -242,7 +242,7 @@ var Bot = {
 		];
 
 		var consoleString = (mac) ? commands.join("; ") : commands.join(" && ");
-
+        console.log(consoleString);
 		exec( consoleString, callback );
 
 	},
@@ -480,7 +480,6 @@ function mainLoop(){
 
 //Very "easy" test cases. Bot should predict these 100% correctly.
 function easyTests(){
-
     //Initialize blue team's dummy data
     Bot.analysis.blue.pokemon.push(pokemonDatabase.Squirtle);
     assert.equal("Squirtle", Bot.analysis.blue.pokemon[0].name, "Failed to add Squirtle to team Blue.");
