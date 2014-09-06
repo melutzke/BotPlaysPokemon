@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4dce005e-28d0-498d-8e08-54aa2eaed2c3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshot.jpg" afterPath="$PROJECT_DIR$/screenshot.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotPlaysPokemon.js" afterPath="$PROJECT_DIR$/BotPlaysPokemon.js" />
     </list>
     <ignored path="BotPlaysPokemon.iws" />
@@ -28,7 +29,7 @@
       <file leaf-file-name="BotPlaysPokemon.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotPlaysPokemon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="403" column="96" selection-start="12692" selection-end="12692" vertical-scroll-proportion="4.355705" vertical-offset="4098" max-vertical-offset="6510">
+            <state line="3" column="42" selection-start="140" selection-end="140" vertical-scroll-proportion="-14.228188" vertical-offset="6405" max-vertical-offset="6885">
               <folding />
             </state>
           </provider>
@@ -126,7 +127,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/BotPlaysPokemon.js" />
     <property name="FullScreen" value="true" />
   </component>
-  <component name="RunManager" selected="Node.js.Unnamed">
+  <component name="RunManager" selected="Node.js.Release">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -156,14 +157,21 @@
       <browser start="false" url="" with-js-debugger="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unnamed" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="BotPlaysPokemon.js" application-parameters="x x -d" working-dir="$PROJECT_DIR$">
+    <configuration default="false" name="Debug" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="BotPlaysPokemon.js" application-parameters="2560 1600 -d" working-dir="$PROJECT_DIR$">
       <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.run" />
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Node.js.Unnamed" />
+    <configuration default="false" name="Release" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="BotPlaysPokemon.js" application-parameters="2560 1600" working-dir="$PROJECT_DIR$">
+      <browser start="false" url="" with-js-debugger="false" />
+      <RunnerSettings RunnerId="NodeJS.run" />
+      <ConfigurationWrapper RunnerId="NodeJS.run" />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.Debug" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.Release" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -245,9 +253,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/screenshot.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BotPlaysPokemon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="403" column="96" selection-start="12692" selection-end="12692" vertical-scroll-proportion="4.355705" vertical-offset="4098" max-vertical-offset="6510">
+        <state line="3" column="42" selection-start="140" selection-end="140" vertical-scroll-proportion="-14.228188" vertical-offset="6405" max-vertical-offset="6885">
           <folding />
         </state>
       </provider>
