@@ -15,7 +15,8 @@ var screen = {
 	heightRatio: process.argv[3] / 1080
 }
 var heightOffset;
-if(mac) heightOffset = .1777 * screen.heightRatio/2;
+if(mac) heightOffset = .1777 * process.argv[3] / 2;
+console.log(heightOffset);
 
 console.log(screen);
 
@@ -194,7 +195,7 @@ var Bot = {
 	analyzeScreenshot: 	function(callback){
 		var commands = [
 			// take a screenshot
-			(mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
+			(!mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
 			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
