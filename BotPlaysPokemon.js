@@ -401,7 +401,6 @@ function mainLoop(){
 
 //Very "easy" test cases. Bot should predict these 100% correctly.
 function easyTests(){
-    var assert = require('assert');
 
     //Initialize blue team's dummy data
     Bot.analysis.blue.pokemon.push(pokemonDatabase.Squirtle);
