@@ -13,6 +13,13 @@ function debug(){
 	}
 }
 
+function padToSize(string, size){
+	while(string.length < size){
+		string += " ";
+	}
+	return string;
+}
+
 function read(filename){
 	return fs.readFileSync(filename, "utf8").trim()
 }
@@ -345,6 +352,7 @@ function mainLoop(){
 		// if all is well to this point
 		Bot.analysis.valid = true;
 		Bot.state = "place_bet";
+		Bot.busy = false;
 
 	} else if( Bot.state == "place_bet" ){
 		debug("Placing bet");
