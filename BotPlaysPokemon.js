@@ -7,7 +7,7 @@ var irc = 				require('irc'),
 	pokemonDatabase = 	require("./pokemon_database.json");
 	moveDatabase = 		require("./move_database.json")
 
-var mac = (os.platform() != "darwin");
+var mac = (os.platform().toLowerCase() == "darwin");
 
 
 var screen = {
@@ -15,7 +15,7 @@ var screen = {
 	heightRatio: process.argv[3] / 1080
 }
 var heightOffset;
-if(mac) heightOffset = .1111 * heightRatio;
+if(mac) heightOffset = .1777777777777 * screen.heightRatio;
 
 console.log(screen);
 
@@ -241,7 +241,7 @@ var Bot = {
 			"tesseract temp.png ./place_your_bets bazaar"
 		];
 
-		var consoleString = commands.join(" && ");
+		var consoleString = (mac) ? commands.join("; ") : commands.join(" && ");
 
 		exec( consoleString, callback );
 
