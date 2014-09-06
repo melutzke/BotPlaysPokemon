@@ -7,7 +7,7 @@ var irc = 				require('irc'),
 	pokemonDatabase = 	require("./pokemon_database.json");
 	moveDatabase = 		require("./move_database.json")
 
-var mac = (os.platform() != "darwin");
+var mac = (os.platform().toLowerCase() == "darwin");
 
 
 var screen = {
@@ -15,7 +15,7 @@ var screen = {
 	heightRatio: process.argv[3] / 1080
 }
 var heightOffset;
-if(mac) heightOffset = .1111 * heightRatio;
+if(mac) heightOffset = .1777 * screen.heightRatio/2;
 
 console.log(screen);
 
@@ -101,7 +101,7 @@ var specialCases = {
 var User = {
 	username: 	"daguava",
 	oauth: 		"oauth:iazmm085g57yiy8m5bnswyxdfvjidt7",
-	balance: 	NaN,
+	balance: 	100,
 	wins: 		0,
 	losses:		0
 }
@@ -241,8 +241,9 @@ var Bot = {
 			"tesseract temp.png ./place_your_bets bazaar"
 		];
 
-		var consoleString = commands.join(" && ");
 
+		var consoleString = commands.join(" ; ");
+        console.log(consoleString);
 		exec( consoleString, callback );
 
 	},
@@ -519,7 +520,7 @@ function debugMain(){
 var debugging = process.argv[4] == "-d";
 
 if(!debugging){
-    setInterval( mainLoop, 3000 );
+    setInterval( mainLoop, 10000 );
 }
 
 else{
