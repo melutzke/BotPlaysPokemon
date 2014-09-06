@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4dce005e-28d0-498d-8e08-54aa2eaed2c3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshot.jpg" afterPath="$PROJECT_DIR$/screenshot.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BotPlaysPokemon.js" afterPath="$PROJECT_DIR$/BotPlaysPokemon.js" />
     </list>
     <ignored path="BotPlaysPokemon.iws" />
@@ -29,7 +28,7 @@
       <file leaf-file-name="BotPlaysPokemon.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BotPlaysPokemon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="42" selection-start="140" selection-end="140" vertical-scroll-proportion="-14.228188" vertical-offset="6405" max-vertical-offset="6885">
+            <state line="8" column="0" selection-start="326" selection-end="326" vertical-scroll-proportion="0.26845637" vertical-offset="0" max-vertical-offset="6900">
               <folding />
             </state>
           </provider>
@@ -260,7 +259,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BotPlaysPokemon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="42" selection-start="140" selection-end="140" vertical-scroll-proportion="-14.228188" vertical-offset="6405" max-vertical-offset="6885">
+        <state line="8" column="0" selection-start="326" selection-end="326" vertical-scroll-proportion="0.26845637" vertical-offset="0" max-vertical-offset="6900">
           <folding />
         </state>
       </provider>

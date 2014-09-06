@@ -1,4 +1,5 @@
 var irc = 				require('irc'),
+	os = 				require('os'),
 	exec = 				require('child_process').exec,
 	fs = 				require('fs'),
     assert =            require('assert'),
@@ -172,7 +173,7 @@ var Bot = {
 	analyzeScreenshot: 	function(callback){
 		var commands = [
 			// take a screenshot
-			"convert screenshot: ./screenshot.jpg",
+			(os.platform() != "darwin") ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
 			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
