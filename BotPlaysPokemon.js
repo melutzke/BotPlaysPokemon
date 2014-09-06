@@ -14,8 +14,8 @@ var screen = {
 	widthRatio: process.argv[2] / 1920,
 	heightRatio: process.argv[3] / 1080
 }
-
-if(mac) screen.heightRatio *= (10/9);
+var heightOffset;
+if(mac) heightOffset = .1111 * heightRatio;
 
 console.log(screen);
 
@@ -101,7 +101,7 @@ var specialCases = {
 var User = {
 	username: 	"daguava",
 	oauth: 		"oauth:iazmm085g57yiy8m5bnswyxdfvjidt7",
-	balance: 	100,
+	balance: 	NaN,
 	wins: 		0,
 	losses:		0
 }
@@ -134,21 +134,38 @@ Twitch.addListener('message', function (from, to, message) {
 			Bot.canBet = true;	// may want to move to "new match" for slow connections that skip
 		}
 		if( message.contains("10 seconds") ){
-			Bot.canBet = false;
+			//Bot.canBet = false;
 		}
 		if( message.contains("time is now over") ){
-
+			Bot.canBet = false;
 		}
 	}
 
 	if( from == "tppbankbot" ){
 		if( message.toLowerCase().contains( User.username.toLowerCase() ) ){
 			User.balance = Number( message.split(" ").pop() );
-			console.log("Updated balance to " + User.balance.toString() );
+			console.log("Updated User.balance to " + User.balance.toString() );
 		}
 	}
 
 });
+
+Twitch.bet = function(team, amount, callback){
+
+	if(Bot.canBet){
+		
+		var betString = "!bet " + parseInt(amount).toString() + " " + team;
+		console.log("Betting!", betString);
+		Twitch.say("#twitchplayspokemon", betString);
+		Bot.canBet = false;
+		callback();
+		
+	} else {
+		console.log("Skipped doing a bet");
+	}
+	
+	
+}
 
 var Bot = {
 	state: 	"initial_balance",
@@ -179,47 +196,47 @@ var Bot = {
 			// take a screenshot
 			(mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_first bazaar",	// semi-accurate blue_first pokemon name
 
 			//find second blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 661 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 661 * screen.widthRatio + "+" + 245 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_second bazaar",	// semi-accurate blue_second pokemon name
 
 			// find third blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 828 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 828 * screen.widthRatio + "+" + 245 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_third bazaar",	// semi-accurate blue_third pokemon name
 
 			// find first red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 930 * screen.widthRatio + "+" + 640 * screen.heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 930 * screen.widthRatio + "+" + 640 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_first bazaar",	// semi-accurate red_first pokemon name
 
 			// find second red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1095 * screen.widthRatio + "+" + 640 * screen.heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1095 * screen.widthRatio + "+" + 640 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_second bazaar",	// semi-accurate red_second pokemon name
 
 			// find third red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1265 * screen.widthRatio + "+" + 640 * screen.heightRatio + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1265 * screen.widthRatio + "+" + 640 * screen.heightRatio + heightOffset + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_third bazaar",		// semi-accurate red_third pokemon name
 
 			// find money bet on blue
-			"convert screenshot.jpg -crop 8%x4%+" + 23 * screen.widthRatio + "+" + 1040 * screen.heightRatio + " -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 8%x4%+" + 23 * screen.widthRatio + "+" + 1040 * screen.heightRatio + heightOffset + " -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./blue_money_bet bazaar",
 
 			// find money bet on red
-			"convert screenshot.jpg -crop 8%x4%+" + 1766 * screen.widthRatio + "+" + 1042 * screen.heightRatio + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 8%x4%+" + 1766 * screen.widthRatio + "+" + 1042 * screen.heightRatio + heightOffset + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./red_money_bet bazaar",
 
 			// see if "place your bets" text is up
-			"convert screenshot.jpg -crop 16.4%x6.7%+" + 330 * screen.widthRatio + "+" + 90 * screen.heightRatio + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 16.4%x6.7%+" + 330 * screen.widthRatio + "+" + 90 * screen.heightRatio + heightOffset + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./place_your_bets bazaar"
 		];
@@ -272,27 +289,57 @@ var Bot = {
 		return Math.min(maxDamage, secondPokemon.hp);
 	},
 
-    placeBet: function(){
+    placeBet: function(callback){
 
-        /* Only bet up to 10% of the balance */
+        /* Only bet up to 10% of the User.balance */
         var baseBet = User.balance * 0.10;
 
         var blueScore = Bot.analysis.blue.damage / Bot.analysis.red.health;
         var redScore = Bot.analysis.red.damage / Bot.analysis.blue.health;
 
+        var minScore = Math.min(blueScore, redScore);
+
+        blueScore /= minScore;
+        redScore /= minScore;
+
+        Bot.analysis.blue.ratio = blueScore;
+        Bot.analysis.red.ratio = redScore;
+
+        var confidence = Math.max(blueScore, redScore);
+        Bot.analysis.guess.confidence = confidence;
+
         console.log("blueScore: " + blueScore + " redScore: " + redScore);
 
-        if(blueScore > redScore){
-            Bot.guess.team = "blue";
-            //Bot.guess.confidence = 0; //not sure wat do here, yet
-        }
+        var team = (blueScore > redScore) ? "blue" : "red";
 
-        else{
-            Bot.guess.team = "red";
-            //Bot.guess.confidence = 0; //not sure wat do here, yet
-        }
 
-        //TODO: Place the actual bet
+        var bet = 0;
+		if(confidence > 1){
+			bet = User.balance * 0.10;
+		}
+		if(confidence > 1.3){
+			bet = User.balance * 0.15;
+		}
+		if(confidence > 1.5){
+			bet = User.balance * 0.23;
+		}
+		if(confidence > 1.6){
+			bet = User.balance * 0.3;
+		}
+		if(confidence > 2.1){
+			bet = User.balance * 0.75
+		}
+		if(confidence > 3){
+			bet = User.balance
+		}
+		
+		//if(bet < 100 && User.balance > 300) bet = 100;
+		if(bet > User.balance) bet = User.balance;
+		if( User.balance == 100) bet = 100;
+
+		bet = Math.min( Math.ceil(bet/10)*10, User.balance );
+
+        Twitch.bet(team, bet, callback);
 
     }
 
@@ -318,7 +365,8 @@ function mainLoop(){
 	Bot.busy = true;
 
 	if( Bot.state == "initial_balance" ){
-		debug("Waiting for intial balance... (requires certain time window)");
+		Twitch.say("#twitchplayspokemon", "!balance");
+		debug("Waiting for intial User.balance... (requires certain time window)");
 		var balanceUpdateInterval = setInterval(function(){
 			debug("Inside interval");
 			if( ! isNaN(User.balance) ){
@@ -409,11 +457,26 @@ function mainLoop(){
 
 	} else if( Bot.state == "place_bet" ){
 		debug("Placing bet");
-		console.log("All good in the hood, bro. You made it to the betting phase!");
+		console.log("Betting phase");
 
-        Bot.placeBet();
+        Bot.placeBet(function(){
+        	Bot.state = "screenshot_team_data";
+        });
+        Bot.busy = false;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Very "easy" test cases. Bot should predict these 100% correctly.
 function easyTests(){
