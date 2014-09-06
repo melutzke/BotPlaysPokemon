@@ -7,11 +7,15 @@ var irc = 				require('irc'),
 	pokemonDatabase = 	require("./pokemon_database.json");
 	moveDatabase = 		require("./move_database.json")
 
+var mac = (os.platform() != "darwin");
+
 
 var screen = {
 	widthRatio: process.argv[2] / 1920,
 	heightRatio: process.argv[3] / 1080
 }
+
+if(mac) screen.heightRatio *= (10/9);
 
 console.log(screen);
 
@@ -173,7 +177,7 @@ var Bot = {
 	analyzeScreenshot: 	function(callback){
 		var commands = [
 			// take a screenshot
-			(os.platform() != "darwin") ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
+			(mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
 			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + 245 * screen.heightRatio + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
