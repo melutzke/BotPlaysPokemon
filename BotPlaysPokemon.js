@@ -12,7 +12,9 @@ var mac = (os.platform().toLowerCase() == "darwin");
 
 var screen = {
 	widthRatio: process.argv[2] / 1920,
-	heightRatio: process.argv[3] / 1080
+	heightRatio: process.argv[3] / 1080,
+	width: process.argv[2],
+	height: process.argv[3]
 }
 var heightOffset;
 if(mac) heightOffset = .1777 * process.argv[3] / 2;
@@ -193,51 +195,81 @@ var Bot = {
 		}
 	},
 	analyzeScreenshot: 	function(callback){
+
+		var x1 = 493,
+			x2 = 661,
+			x3 = 828,
+			x4 = 930,
+			x5 = 1095,
+			x6 = 1265,
+			x7,
+			x8,
+			x9;
+
+		var y1 = 245,
+			y2 = 245,
+			y3 = 245,
+			y4 = 640,
+			y5 = 640,
+			y6 = 640,
+			y7,
+			y8,
+			y9;
+
+		if( mac ){
+			x1 = 334;
+			x2 = 458;
+			x3 = 570;
+			x4 = 615;
+			x5 = 735;
+			x6 = 865;
+		}
+
 		var commands = [
 			// take a screenshot
 			( ! mac) ? "convert screenshot: ./screenshot.jpg" : "screencapture ./screenshot.jpg",
 			// find first blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 493 * screen.widthRatio + "+" + (245 * screen.heightRatio + heightOffset) + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + x1 + "+" + y1 + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_first bazaar",	// semi-accurate blue_first pokemon name
 
 			//find second blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 661 * screen.widthRatio + "+" + (245 * screen.heightRatio + heightOffset) + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + x2 + "+" + y2 + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_second bazaar",	// semi-accurate blue_second pokemon name
 
 			// find third blue pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 828 * screen.widthRatio + "+" + (245 * screen.heightRatio + heightOffset) + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + x3 + "+" + y3 + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./blue_third bazaar",	// semi-accurate blue_third pokemon name
 
 			// find first red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 930 * screen.widthRatio + "+" + (640 * screen.heightRatio + heightOffset) + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + x4 + "+" + y4 + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_first bazaar",	// semi-accurate red_first pokemon name
 
 			// find second red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1095 * screen.widthRatio + "+" + (640 * screen.heightRatio + heightOffset) + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + x5 + "+" + y5 + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_second bazaar",	// semi-accurate red_second pokemon name
 
 			// find third red pokemon, crop, filter, ocr
-			"convert screenshot.jpg -crop 8.6%x2.8%+" + 1265 * screen.widthRatio + "+" + (640 * screen.heightRatio + heightOffset) + " ./temp.png",
+			"convert screenshot.jpg -crop 8.6%x2.8%+" + x6 + "+" + y6 + " ./temp.png",
 			"convert temp.png -fill black -fuzz 14% +opaque white ./temp.png",
 			"tesseract temp.png ./red_third bazaar",		// semi-accurate red_third pokemon name
 
 			// find money bet on blue
-			"convert screenshot.jpg -crop 8%x4%+" + 23 * screen.widthRatio + "+" + (1040 * screen.heightRatio + heightOffset) + " -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 8%x4%+" + 23 + " -channel red -threshold 100% -channel green -threshold 100% -channel blue -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./blue_money_bet bazaar",
 
 			// find money bet on red
-			"convert screenshot.jpg -crop 8%x4%+" + 1766 * screen.widthRatio + "+" + (1042 * screen.heightRatio + heightOffset) + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 8%x4%+" + 1766 + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./red_money_bet bazaar",
 
 			// see if "place your bets" text is up
-			"convert screenshot.jpg -crop 16.4%x6.7%+" + 330 * screen.widthRatio + "+" + (90 * screen.heightRatio + heightOffset) + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
+			"convert screenshot.jpg -crop 16.4%x6.7%+" + 330 + " -channel blue -threshold 100% -channel green -threshold 100% -channel red -threshold 40% ./temp.png",
 			"convert ./temp.png -threshold 20 ./temp.png",
 			"tesseract temp.png ./place_your_bets bazaar"
 		];
