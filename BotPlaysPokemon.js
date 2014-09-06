@@ -5,6 +5,8 @@ var irc = 				require('irc'),
 	pokemonDatabase = 	require("./pokemon_database.json");
 	moveDatabase = 		require("./move_database.json")
 
+	// test
+
 var debugging = true;
 
 var screen = {
