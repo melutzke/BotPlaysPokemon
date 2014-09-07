@@ -104,7 +104,7 @@ var specialCases = {
 var User = {
 	username: 	"daguava",
 	oauth: 		"oauth:iazmm085g57yiy8m5bnswyxdfvjidt7",
-	balance: 	100,
+	balance: 	NaN,
 	wins: 		0,
 	losses:		0
 }
@@ -142,11 +142,31 @@ Twitch.addListener('message', function (from, to, message) {
 		if( message.contains("time is now over") ){
 			Bot.canBet = false;
 		}
+		if( message.contains("about to begin") ){
+			setTimeout(function(){
+				if(Bot.state == "place_bet"){
+					Bot.canBet = false;
+					Bot.state = "screenshot_team_data";
+					Bot.busy = false;
+				}
+			}, 10000);
+			
+		}
 	}
 
 	if( from == "tppbankbot" ){
 		if( message.toLowerCase().contains( User.username.toLowerCase() ) ){
+			var prevBalance = User.balance;
 			User.balance = Number( message.split(" ").pop() );
+			if(User.balance > prevBalance && ! isNaN(prevBalance) ){
+				User.wins++;
+				console.log('A winner is us!: ', User.wins.toString() + " / " + User.losses.toString() );
+			} else if(User.balance < prevBalance || ( User.balance == 100 && prevBalance == 100) ){
+				User.losses--;
+				console.log('Losers, we are it');
+			} else if(User.balance == prevBalance, User.wins.toString() + " / " + User.losses.toString()){
+				// do nothing
+			}
 			console.log("Updated User.balance to " + User.balance.toString() );
 		}
 	}
@@ -155,7 +175,7 @@ Twitch.addListener('message', function (from, to, message) {
 
 Twitch.bet = function(team, amount, callback){
 
-	if(Bot.canBet){
+	//if(Bot.canBet){
 		
 		var betString = "!bet " + parseInt(amount).toString() + " " + team;
 		console.log("Betting!", betString);
@@ -163,9 +183,9 @@ Twitch.bet = function(team, amount, callback){
 		Bot.canBet = false;
 		callback();
 		
-	} else {
-		console.log("Skipped doing a bet");
-	}
+	//} else {
+	//	console.log("Skipped doing a bet");
+	//}
 	
 	
 }
@@ -275,7 +295,7 @@ var Bot = {
 		];
 
 		var consoleString = (mac) ? commands.join("; ") : commands.join(" && ");
-        console.log(consoleString);
+        //console.log(consoleString);
 		exec( consoleString, callback );
 
 	},
@@ -458,6 +478,11 @@ function mainLoop(){
 	} else if( Bot.state == "populate_team_data" ){
 		debug("Populating team data");
 
+		Bot.analysis.blue.damage = 0;
+		Bot.analysis.red.damage = 0;
+		Bot.analysis.blue.health = 0;
+		Bot.analysis.red.health = 0;
+
 		Bot.analysis.blue.pokemon.forEach(function( bluePokemon ){
 			Bot.analysis.red.pokemon.forEach(function( redPokemon ){
 
@@ -489,13 +514,19 @@ function mainLoop(){
 		Bot.busy = false;
 
 	} else if( Bot.state == "place_bet" ){
+
 		debug("Placing bet");
 		console.log("Betting phase");
 
         Bot.placeBet(function(){
         	Bot.state = "screenshot_team_data";
+        	setTimeout(function(){
+        		Bot.busy = false;
+        	}, 60 * 2 * 1000); // wait 2 minutes before looking for the next team
+        	
+        	console.log("Callback happened");
         });
-        Bot.busy = false;
+        
 	}
 }
 
