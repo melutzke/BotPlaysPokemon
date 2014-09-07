@@ -4,8 +4,10 @@ var irc = 				require('irc'),
 	fs = 				require('fs'),
     assert =            require('assert'),
 	pokemonDictionary = require("./pokemon_array.json"),
-	pokemonDatabase = 	require("./pokemon_database.json");
-	moveDatabase = 		require("./move_database.json")
+	pokemonDatabase = 	require("./pokemon_database.json"),
+	moveDatabase = 		require("./move_database.json"),
+    app = require('express').createServer();
+    io = require('socket.io')(app);
 
 var mac = (os.platform().toLowerCase() == "darwin");
 
